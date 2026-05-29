@@ -14,18 +14,13 @@ const MAP_WORK_PERIODS = [
   'до 1 июня 2026'
 ];
 
-const MAP_PLACES = [
-  { place: 'Минск', coords: [53.9045, 27.5615] },
-  { place: 'Борисов', coords: [54.2279, 28.5050] },
-  { place: 'Жодино', coords: [54.0983, 28.3401] },
-  { place: 'Смолевичи', coords: [54.0280, 28.0897] },
-  { place: 'Молодечно', coords: [54.3097, 26.8513] },
-  { place: 'Дзержинск', coords: [53.6847, 27.1318] },
-  { place: 'Логойск', coords: [54.2067, 27.8517] },
-  { place: 'Фаниполь', coords: [53.7507, 27.3331] },
-  { place: 'Солигорск', coords: [52.7868, 27.5334] },
-  { place: 'Столбцы', coords: [53.4838, 26.7336] }
-];
+/** Техника на карте в Кобрине; остальная — в Минске */
+const MAP_KOBRIN_FLEET_IDS = ['b879f-8965', 'ek12-8872', 'cdm308'];
+
+const MAP_CITY_COORDS = {
+  minsk: { place: 'Минск', coords: [53.9045, 27.5615] },
+  kobrin: { place: 'Кобрин', coords: [52.2138, 24.3564] }
+};
 
 function shuffleArray(items) {
   const list = [...items];
@@ -36,26 +31,39 @@ function shuffleArray(items) {
   return list;
 }
 
+function coordsWithJitter(baseCoords, index, total) {
+  const angle = (index / Math.max(total, 1)) * Math.PI * 2;
+  const radius = 0.018 + (index % 3) * 0.006;
+  return [
+    baseCoords[0] + Math.cos(angle) * radius,
+    baseCoords[1] + Math.sin(angle) * radius
+  ];
+}
+
 function buildMapMarkers() {
   if (typeof FLEET === 'undefined') return [];
 
-  const fleet = shuffleArray(FLEET);
+  const fleet = FLEET.filter(item => item.id !== 'hmb68');
   const periods = shuffleArray(MAP_WORK_PERIODS);
 
-  return MAP_PLACES.map((item, index) => {
-    const equipment = fleet[index % fleet.length];
-    const jitter = 0.04;
-    const lat = item.coords[0] + (Math.random() - 0.5) * jitter;
-    const lon = item.coords[1] + (Math.random() - 0.5) * jitter;
+  const kobrinFleet = fleet.filter(item => MAP_KOBRIN_FLEET_IDS.includes(item.id));
+  const minskFleet = fleet.filter(item => !MAP_KOBRIN_FLEET_IDS.includes(item.id));
 
-    return {
-      coords: [lat, lon],
-      place: item.place,
+  const buildCityMarkers = (items, cityKey) => {
+    const city = MAP_CITY_COORDS[cityKey];
+    return items.map((equipment, index) => ({
+      coords: coordsWithJitter(city.coords, index, items.length),
+      place: city.place,
       dates: periods[index % periods.length],
       equipmentName: equipment.name,
       image: equipment.image
-    };
-  });
+    }));
+  };
+
+  return [
+    ...buildCityMarkers(minskFleet, 'minsk'),
+    ...buildCityMarkers(kobrinFleet, 'kobrin')
+  ];
 }
 
 function createBalloonHtml(marker) {
@@ -74,8 +82,8 @@ function initYandexMap() {
 
   ymaps.ready(() => {
     const map = new ymaps.Map('yandexMap', {
-      center: [53.75, 27.75],
-      zoom: 8,
+      center: [53.35, 26.2],
+      zoom: 7,
       controls: ['zoomControl', 'fullscreenControl']
     }, {
       suppressMapOpenBlock: true

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ТопАгроБел — Аренда спецтехники в Минске и Минской области</title>
   <meta name="description" content="Аренда спецтехники с машинистом: LGCE, Lonking, ЕК-12. 7 единиц техники. Минск и Минская область. +375 29 128-62-17, Олег.">
+  <link rel="icon" href="images/logo_ekskavator_nadezhny_variant_1.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,14 +17,25 @@
   <header class="header">
     <div class="container header__bar">
       <a href="#top" class="logo header__logo">
-        <span class="logo__icon"></span>
+        <img
+          src="images/logo_ekskavator_nadezhny_variant_1.svg"
+          alt="ТопАгроБел"
+          class="logo__img"
+          width="52"
+          height="52"
+          decoding="async"
+        >
         <span class="logo__text">ТопАгроБел</span>
       </a>
+
+      <button type="button" class="header__burger" id="headerBurger" aria-label="Открыть меню" aria-expanded="false" aria-controls="navMobile">
+        <span></span><span></span><span></span>
+      </button>
 
       <nav class="header__nav" aria-label="Основная навигация">
         <ul class="nav__list">
           <li><a href="#top" class="nav__link nav__link--active">Главная</a></li>
-          <li><a href="#catalog" class="nav__link">Каталог</a></li>
+          <li><a href="#catalog" class="nav__link">Аренда</a></li>
           <li><a href="#services" class="nav__link">Услуги</a></li>
           <li><a href="#about" class="nav__link">О компании</a></li>
           <li><a href="#contacts" class="nav__link">Контакты</a></li>
@@ -31,14 +43,31 @@
       </nav>
 
       <div class="header__actions">
-        <a href="tel:+375291286217" class="header__phone">+375 29 128-62-17</a>
-        <button type="button" class="btn btn--brown btn--sm" data-scroll="cta">Заказать звонок</button>
+        <div class="header__contact">
+          <a href="tel:+375291286217" class="header__phone">+375 29 128-62-17</a>
+          <div data-messenger-links></div>
+        </div>
+        <button type="button" class="btn btn--yellow btn--sm" data-open-order data-order-from="Шапка">Заказать звонок</button>
       </div>
     </div>
   </header>
 
+  <div class="nav-mobile" id="navMobile" aria-hidden="true">
+    <button type="button" class="nav-mobile__backdrop" data-close-nav aria-label="Закрыть меню"></button>
+    <nav class="nav-mobile__panel" aria-label="Мобильная навигация">
+      <a href="#top" class="nav-mobile__link">Главная</a>
+      <a href="#catalog" class="nav-mobile__link">Аренда</a>
+      <a href="#services" class="nav-mobile__link">Услуги</a>
+      <a href="#about" class="nav-mobile__link">О компании</a>
+      <a href="#contacts" class="nav-mobile__link">Контакты</a>
+      <a href="tel:+375291286217" class="btn btn--yellow btn--full nav-mobile__call">+375 29 128-62-17</a>
+      <div data-messenger-links data-messenger-nav></div>
+      <button type="button" class="btn btn--brown btn--full" data-open-order data-order-from="Меню" data-close-nav>Заказать звонок</button>
+    </nav>
+  </div>
+
   <!-- Hero: баннер-слайдер -->
-  <section class="hero-banner screen-section" id="hero">
+  <section class="hero-banner screen-section section--bg-a" id="hero">
     <div class="swiper hero-banner-swiper">
       <div class="swiper-wrapper" id="heroBannerWrapper"></div>
       <div class="hero-banner__controls">
@@ -56,129 +85,85 @@
   </section>
 
   <!-- Catalog -->
-  <section class="catalog section screen-section" id="catalog">
+  <section class="catalog section screen-section section--bg-b" id="catalog" aria-labelledby="catalogTitle">
     <div class="container">
-      <h2 class="section-title">Каталог</h2>
-      <div class="catalog-tabs">
-        <button class="catalog-tabs__btn catalog-tabs__btn--active" data-tab="equipment">Техника</button>
-        <button class="catalog-tabs__btn" data-tab="addons">Допы</button>
-      </div>
+      <h1 class="catalog__title" id="catalogTitle">Аренда техники для физ и юр лиц</h1>
       <div class="catalog-grid" id="catalogGridEquipment"></div>
-      <div class="catalog-grid catalog-grid--hidden" id="catalogGridAddons"></div>
     </div>
   </section>
 
   <!-- About -->
-  <section class="about-text screen-section section--gray" id="about">
+  <section class="about-text screen-section section--bg-a" id="about">
     <div class="container">
-      <h2 class="section-title section-title--left">Аренда спецтехники в Минске и Минской области</h2>
-      <p class="about-text__lead">
-        <strong>ТопАгроБел</strong> — аренда строительной и сельхозтехники с машинистом по <strong>Минску и всей Минской области</strong>.
-        В нашем парке семь единиц техники: экскаваторы-погрузчики LGCE B879F и B877F, фронтальный погрузчик L933F, колёсный экскаватор ЕК-12, гусеничный LGCE E6255F и минипогрузчик Lonking CDM308.
-        У каждой машины закреплён опытный машинист с допусками — вы получаете готовое решение «техника + оператор» без отдельного поиска экипажа.
-        Сдаём в аренду на смену и посуточно: земляные работы, котлованы, планировка участка, погрузка и вывоз грунта, благоустройство, подготовка площадок под строительство и фундаменты, работы на сельхозобъектах.
-        Также доступны навесное оборудование: гидромолот, планировочные и стандартные ковши под технику LGCE.
-        Подача на объект — от 2 часов, техника проходит плановое ТО, условия аренды прозрачные, без скрытых платежей.
-        Подберём машину под задачу и бюджет, поможем с расчётом объёма работ.
-        Звоните <a href="tel:+375291286217">+375 29 128-62-17</a>, менеджер <strong>Олег</strong> — рассчитаем стоимость смены или суток под ваш объект и ответим на вопросы по срокам и документам.
-      </p>
+      <h2 class="section-title">Аренда спецтехники в Минске и Минской области</h2>
+      <div class="about-text__grid" id="aboutCardsGrid"></div>
     </div>
   </section>
 
   <!-- Video -->
-  <section class="factory-video screen-section" id="portfolio">
+  <section class="factory-video screen-section section--bg-b" id="portfolio">
     <div class="container factory-video__inner">
-      <h2 class="section-title">Наша техника строит заводы</h2>
-      <div class="factory-video__embed">
-        <iframe
-          src="https://www.youtube.com/embed/_KDpv7E0u4k"
-          title="Наша техника строит заводы — ТопАгроБел"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
+      <h2 class="section-title">Наши ребята строят заводы</h2>
+      <div class="factory-video__grid">
+        <div class="factory-video__embed">
+          <iframe
+            src="https://www.youtube.com/embed/_KDpv7E0u4k"
+            title="Наши ребята строят заводы — ТопАгроБел"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="factory-video__drivers" id="factoryDrivers" aria-label="Наши машинисты"></div>
       </div>
     </div>
   </section>
 
-  <!-- Services: problems & reasons -->
-  <section class="compare screen-section section--gray" id="services">
-    <div class="container compare__grid">
-      <article class="compare__col compare__col--problems">
-        <h2 class="compare__title">Проблемы при аренде техники у других компаний</h2>
-        <div class="compare__image">
-          <img src="images/Crashed.webp" alt="Поломка техники при аренде у других компаний" loading="lazy">
-        </div>
-        <div class="compare__list compare__list--purple">
-          <ul>
-            <li>Техника на объекте с неисправностями</li>
-            <li>Задержки подачи и срыв сроков</li>
-            <li>Скрытые доплаты в договоре</li>
-            <li>Нет связи с диспетчером</li>
-            <li>Машинисты без допусков</li>
-            <li>Нет нужной модели в срок</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="compare__col compare__col--reasons">
-        <h2 class="compare__title">4 причины арендовать у нас</h2>
-        <div class="compare__image">
-          <img src="images/All.webp" alt="Парк спецтехники ТопАгроБел" loading="lazy">
-        </div>
-        <div class="compare__list compare__list--green">
-          <ol>
-            <li><strong>Свой парк</strong> — 7 единиц LGCE, Lonking, ЕК-12</li>
-            <li><strong>Закреплённые машинисты</strong> — у каждой техники свой оператор</li>
-            <li><strong>Быстрая подача</strong> — Минск и область, от 2 часов</li>
-            <li><strong>Честные цены</strong> — без скрытых платежей</li>
-          </ol>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- Advantages -->
-  <section class="advantages screen-section" id="advantages">
+  <!-- Why us -->
+  <section class="compare screen-section section--bg-a" id="services">
     <div class="container">
-      <h2 class="section-title">Наши преимущества</h2>
-      <div class="advantages__grid">
-        <div class="advantage-item advantage-item--tl">
-          <div class="advantage-item__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/></svg></div>
-          <p>Доставка по Минску и области</p>
-        </div>
-        <div class="advantage-item advantage-item--tr">
-          <div class="advantage-item__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm.5 13H11v-6l5.25 3.15.75-1.23-4.5-2.67z"/></svg></div>
-          <p>Диспетчер и связь с Олегом</p>
-        </div>
-        <div class="advantage-item advantage-item--ml">
-          <div class="advantage-item__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3z"/></svg></div>
-          <p>7 машинистов в штате</p>
-        </div>
-        <div class="advantage-item advantage-item--center">
-          <img src="images/image 4 .webp" alt="Спецтехника ТопАгроБел" class="advantages__image" loading="lazy">
-        </div>
-        <div class="advantage-item advantage-item--mr">
-          <div class="advantage-item__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
-          <p>Исправная техника</p>
-        </div>
-        <div class="advantage-item advantage-item--bl">
-          <div class="advantage-item__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg></div>
-          <p>Цена по запросу</p>
-        </div>
-        <div class="advantage-item advantage-item--br">
-          <div class="advantage-item__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
-          <p>Быстрое оформление</p>
-        </div>
+      <h2 class="section-title">Почему мы</h2>
+      <div class="compare__grid">
+        <article class="compare__card">
+          <div class="compare__image">
+            <img src="images/Конкуренты.webp" alt="Проблемы аренды техники у других компаний" loading="lazy">
+          </div>
+          <div class="compare__list compare__list--backtext">
+            <h3 class="compare__card-title">У других компаний</h3>
+            <ul class="compare__items compare__items--bad">
+              <li>Техника на объекте с неисправностями</li>
+              <li>Задержки подачи и срыв сроков</li>
+              <li>Скрытые доплаты в договоре</li>
+              <li>Нет связи с диспетчером</li>
+              <li>Машинисты без допусков</li>
+              <li>Нет нужной модели в срок</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="compare__card">
+          <div class="compare__image">
+            <img src="images/мы.webp" alt="Парк спецтехники ТопАгроБел" loading="lazy">
+          </div>
+          <div class="compare__list compare__list--backtext">
+            <h3 class="compare__card-title">У ТопАгроБел</h3>
+            <ol class="compare__items compare__items--good">
+              <li><strong>Свой парк</strong> — 7 единиц LGCE, Lonking, ЕК-12</li>
+              <li><strong>Закреплённые машинисты</strong> — у каждой техники свой оператор</li>
+              <li><strong>Быстрая подача</strong> — Минск и область, от 2 часов</li>
+              <li><strong>Честные цены</strong> — без скрытых платежей</li>
+            </ol>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- Consultation -->
-  <section class="consultation screen-section" id="cta">
+  <section class="consultation screen-section section--bg-b" id="cta">
     <div class="container">
-      <h2 class="section-title section-title--left">Остались вопросы?</h2>
+      <h2 class="section-title">Остались вопросы?</h2>
       <div class="consultation__inner">
         <div class="consultation__left">
           <div class="consultation__contacts">
@@ -187,6 +172,7 @@
               <div>
                 <p class="contact-item__label">Телефон</p>
                 <a href="tel:+375291286217" class="contact-item__value">+375 29 128-62-17</a>
+                <div data-messenger-links></div>
               </div>
             </div>
             <div class="contact-item">
@@ -204,40 +190,31 @@
               </div>
             </div>
           </div>
-          <form class="consultation__form" id="ctaForm">
+          <form class="consultation__form" id="ctaForm" data-source="Консультация">
             <p class="consultation__form-title">Оставить заявку</p>
-            <input type="text" name="name" placeholder="Имя" required>
-            <input type="tel" name="phone" placeholder="Телефон" required>
+            <input type="text" name="name" placeholder="Имя (необязательно)" autocomplete="name">
+            <input type="tel" name="phone" placeholder="+375 (29) 128-62-17" inputmode="tel" autocomplete="tel" required>
             <button type="submit" class="btn btn--brown btn--full">Отправить</button>
           </form>
         </div>
         <div class="consultation__photo">
-          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80" alt="Менеджер ТопАгроБел" loading="lazy">
+          <div class="consultation__photo-frame">
+            <img src="images/Cast/Oleg.webp" alt="Олег — менеджер ТопАгроБел" loading="lazy" width="500" height="600">
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Map + footer -->
-  <div class="site-bottom" id="contacts">
+  <div class="site-bottom section--bg-a" id="contacts">
     <div class="container site-bottom__inner">
       <section class="map-section">
         <div class="map-section__head">
           <h2 class="map-section__title">Наша техника на карте</h2>
-          <p class="map-section__hint">посмотрите, может мы сейчас не далеко от вас</p>
+          <p class="map-section__hint">Посмотрите, может, мы сейчас недалеко от вас</p>
         </div>
         <div id="yandexMap" class="map-section__map" aria-label="Карта расположения техники ТопАгроБел"></div>
-      </section>
-
-      <section class="cta-bar cta-bar--footer">
-        <div class="cta-bar__inner">
-          <span class="cta-bar__title">Заказать звонок</span>
-          <form class="cta-bar__form" id="footerForm">
-            <input type="text" name="name" placeholder="Имя" required>
-            <input type="tel" name="phone" placeholder="Телефон" required>
-            <button type="submit" class="btn btn--brown">Отправить</button>
-          </form>
-        </div>
       </section>
     </div>
 
@@ -245,11 +222,18 @@
       <div class="container">
         <div class="footer__inner">
           <a href="#top" class="logo logo--footer">
-            <span class="logo__icon"></span>
+            <img
+              src="images/logo_ekskavator_nadezhny_variant_1.svg"
+              alt="ТопАгроБел"
+              class="logo__img"
+              width="32"
+              height="32"
+              decoding="async"
+            >
             <span class="logo__text">ТопАгроБел</span>
           </a>
           <nav class="footer__nav">
-            <div class="footer__col">
+            <div class="footer__col footer__col--catalog">
               <h4>Каталог</h4>
               <ul id="footerCatalogLinks"></ul>
             </div>
@@ -263,9 +247,12 @@
             </div>
           </nav>
           <div class="footer__right">
-            <a href="tel:+375291286217" class="footer__phone">+375 29 128-62-17</a>
-            <p class="footer__manager">Олег</p>
-            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=120&q=80" alt="" class="footer__image">
+            <div class="footer__contacts">
+              <a href="tel:+375291286217" class="footer__phone">+375 29 128-62-17</a>
+              <p class="footer__manager">Олег</p>
+              <div data-messenger-links data-messenger-compact></div>
+            </div>
+            <img src="images/Cast/Oleg.webp" alt="Олег — менеджер ТопАгроБел" class="footer__photo" width="36" height="36" loading="lazy">
           </div>
         </div>
       </div>
@@ -275,7 +262,7 @@
     </footer>
   </div>
 
-  <!-- Modal -->
+  <!-- Modal: характеристики -->
   <div class="modal" id="equipmentModal" aria-hidden="true">
     <div class="modal__backdrop" data-close-modal></div>
     <div class="modal__dialog">
@@ -284,9 +271,37 @@
     </div>
   </div>
 
+  <!-- Modal: заказ -->
+  <div class="modal" id="orderModal" aria-hidden="true">
+    <div class="modal__backdrop" data-close-order-modal></div>
+    <div class="modal__dialog modal__dialog--order">
+      <button class="modal__close" data-close-order-modal aria-label="Закрыть">&times;</button>
+      <form class="order-form" id="orderForm" data-source="Модальное окно">
+        <p class="order-form__title">Заказать технику</p>
+        <label class="order-form__field">
+          <span class="order-form__label">Техника</span>
+          <input type="text" name="equipment" readonly tabindex="-1">
+        </label>
+        <input type="text" name="name" placeholder="Имя (необязательно)" autocomplete="name">
+        <input type="tel" name="phone" placeholder="+375 (29) 128-62-17" inputmode="tel" autocomplete="tel" required>
+        <button type="submit" class="btn btn--brown btn--full">Отправить</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="mobile-call-bar">
+    <a href="tel:+375291286217" class="mobile-call-bar__phone" aria-label="Позвонить +375 29 128-62-17">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      <span>Позвонить Олегу</span>
+    </a>
+    <div data-messenger-links data-messenger-compact></div>
+  </div>
+
+  <script src="js/config.js"></script>
   <script src="js/equipment.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="js/map.js"></script>
+  <script src="js/telegram.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

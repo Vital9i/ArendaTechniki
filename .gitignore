@@ -1,0 +1,5 @@
+node_modules/
+.env
+js/config.js
+api/telegram-config.php
+.DS_Store
