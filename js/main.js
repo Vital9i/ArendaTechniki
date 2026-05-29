@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollButtons();
   initSmoothScroll();
   initMobileNav();
+  initHeaderScroll();
   initMessengerLinks();
   window.addEventListener('resize', setHeaderHeight);
 
@@ -284,7 +285,10 @@ function openModal(id) {
         ${getModalSpecs(item.specs).map(([l, v]) => `<tr><td>${l}</td><td>${v}</td></tr>`).join('')}
       </tbody>
     </table>
-    <button type="button" class="btn btn--brown btn--full" data-order="${item.id}" data-close-modal>Заказать</button>
+    <div class="modal__actions">
+      <button type="button" class="btn btn--ghost btn--full modal__back" data-close-modal>Назад</button>
+      <button type="button" class="btn btn--brown btn--full" data-order="${item.id}">Заказать</button>
+    </div>
   `;
 
   content.querySelector('[data-order]')?.addEventListener('click', () => {
@@ -362,9 +366,13 @@ function initOrderModal() {
 }
 
 function initModal() {
-  document.querySelectorAll('#equipmentModal [data-close-modal]').forEach(el => {
-    el.addEventListener('click', closeModal);
-  });
+  const equipmentModal = document.getElementById('equipmentModal');
+  if (equipmentModal) {
+    equipmentModal.addEventListener('click', e => {
+      if (e.target.closest('[data-close-modal]')) closeModal();
+    });
+  }
+
   document.addEventListener('keydown', e => {
     if (e.key !== 'Escape') return;
     if (document.getElementById('orderModal')?.classList.contains('is-open')) {
@@ -558,6 +566,7 @@ function initMobileNav() {
   if (!burger || !nav) return;
 
   const open = () => {
+    document.querySelector('.header')?.classList.remove('header--hidden');
     nav.classList.add('is-open');
     nav.setAttribute('aria-hidden', 'false');
     burger.setAttribute('aria-expanded', 'true');
@@ -589,6 +598,52 @@ function initMobileNav() {
 
 function closeMobileNav() {
   closeMobileNavFn?.();
+}
+
+function initHeaderScroll() {
+  const header = document.querySelector('.header');
+  if (!header) return;
+
+  const mobileQuery = window.matchMedia('(max-width: 1024px)');
+  let lastY = window.scrollY;
+  let ticking = false;
+
+  const update = () => {
+    if (!mobileQuery.matches) {
+      header.classList.remove('header--hidden');
+      lastY = window.scrollY;
+      ticking = false;
+      return;
+    }
+
+    const y = window.scrollY;
+    const delta = y - lastY;
+
+    if (document.body.classList.contains('nav-open') || document.getElementById('orderModal')?.classList.contains('is-open')) {
+      header.classList.remove('header--hidden');
+    } else if (y < 64) {
+      header.classList.remove('header--hidden');
+    } else if (delta > 6) {
+      header.classList.add('header--hidden');
+    } else if (delta < -6) {
+      header.classList.remove('header--hidden');
+    }
+
+    lastY = y;
+    ticking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  mobileQuery.addEventListener('change', () => {
+    header.classList.remove('header--hidden');
+    lastY = window.scrollY;
+  });
 }
 
 function shortName(name) {

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ТопАгроБел — Аренда спецтехники в Минске и Минской области</title>
-  <meta name="description" content="Аренда спецтехники с машинистом: LGCE, Lonking, ЕК-12. 7 единиц техники. Минск и Минская область. +375 29 128-62-17, Олег.">
+  <title>ТОПАГРОБЕЛ — Аренда спецтехники в Минске, Минской области и Кобрине</title>
+  <meta name="description" content="Аренда спецтехники с машинистом: LGCE, Lonking, ЕК-12. 7 единиц техники. Минск, Минская область и Кобрин. +375 29 128-62-17, Олег.">
   <link rel="icon" href="images/logo_ekskavator_nadezhny_variant_1.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,13 +19,13 @@
       <a href="#top" class="logo header__logo">
         <img
           src="images/logo_ekskavator_nadezhny_variant_1.svg"
-          alt="ТопАгроБел"
+          alt="ТОПАГРОБЕЛ"
           class="logo__img"
           width="52"
           height="52"
           decoding="async"
         >
-        <span class="logo__text">ТопАгроБел</span>
+        <span class="logo__text">ТОПАГРОБЕЛ</span>
       </a>
 
       <button type="button" class="header__burger" id="headerBurger" aria-label="Открыть меню" aria-expanded="false" aria-controls="navMobile">
@@ -55,14 +55,24 @@
   <div class="nav-mobile" id="navMobile" aria-hidden="true">
     <button type="button" class="nav-mobile__backdrop" data-close-nav aria-label="Закрыть меню"></button>
     <nav class="nav-mobile__panel" aria-label="Мобильная навигация">
-      <a href="#top" class="nav-mobile__link">Главная</a>
-      <a href="#catalog" class="nav-mobile__link">Аренда</a>
-      <a href="#services" class="nav-mobile__link">Услуги</a>
-      <a href="#about" class="nav-mobile__link">О компании</a>
-      <a href="#contacts" class="nav-mobile__link">Контакты</a>
-      <a href="tel:+375291286217" class="btn btn--yellow btn--full nav-mobile__call">+375 29 128-62-17</a>
-      <div data-messenger-links data-messenger-nav></div>
-      <button type="button" class="btn btn--brown btn--full" data-open-order data-order-from="Меню" data-close-nav>Заказать звонок</button>
+      <div class="nav-mobile__head">
+        <span class="nav-mobile__brand">ТОПАГРОБЕЛ</span>
+        <button type="button" class="nav-mobile__close" data-close-nav aria-label="Закрыть меню">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </div>
+      <div class="nav-mobile__links">
+        <a href="#top" class="nav-mobile__link" data-close-nav>Главная</a>
+        <a href="#catalog" class="nav-mobile__link" data-close-nav>Аренда</a>
+        <a href="#services" class="nav-mobile__link" data-close-nav>Услуги</a>
+        <a href="#about" class="nav-mobile__link" data-close-nav>О компании</a>
+        <a href="#contacts" class="nav-mobile__link" data-close-nav>Контакты</a>
+      </div>
+      <div class="nav-mobile__actions">
+        <a href="tel:+375291286217" class="btn btn--yellow btn--full nav-mobile__call">+375 29 128-62-17</a>
+        <div data-messenger-links data-messenger-nav></div>
+        <button type="button" class="btn btn--brown btn--full" data-open-order data-order-from="Меню" data-close-nav>Заказать звонок</button>
+      </div>
     </nav>
   </div>
 
@@ -95,28 +105,16 @@
   <!-- About -->
   <section class="about-text screen-section section--bg-a" id="about">
     <div class="container">
-      <h2 class="section-title">Аренда спецтехники в Минске и Минской области</h2>
+      <h2 class="section-title">Аренда спецтехники в Минске, Минской области и Кобрине</h2>
       <div class="about-text__grid" id="aboutCardsGrid"></div>
     </div>
   </section>
 
-  <!-- Video -->
+  <!-- Team -->
   <section class="factory-video screen-section section--bg-b" id="portfolio">
     <div class="container factory-video__inner">
-      <h2 class="section-title">Наши ребята строят заводы</h2>
-      <div class="factory-video__grid">
-        <div class="factory-video__embed">
-          <iframe
-            src="https://www.youtube.com/embed/_KDpv7E0u4k"
-            title="Наши ребята строят заводы — ТопАгроБел"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-            loading="lazy"
-          ></iframe>
-        </div>
-        <div class="factory-video__drivers" id="factoryDrivers" aria-label="Наши машинисты"></div>
-      </div>
+      <h2 class="section-title">Наши операторы</h2>
+      <div class="factory-video__drivers" id="factoryDrivers" aria-label="Наши операторы"></div>
     </div>
   </section>
 
@@ -127,7 +125,7 @@
       <div class="compare__grid">
         <article class="compare__card">
           <div class="compare__image">
-            <img src="images/Конкуренты.webp" alt="Проблемы аренды техники у других компаний" loading="lazy">
+            <img src="images/competitors.webp" alt="Проблемы аренды техники у других компаний" loading="lazy">
           </div>
           <div class="compare__list compare__list--backtext">
             <h3 class="compare__card-title">У других компаний</h3>
@@ -144,14 +142,14 @@
 
         <article class="compare__card">
           <div class="compare__image">
-            <img src="images/мы.webp" alt="Парк спецтехники ТопАгроБел" loading="lazy">
+            <img src="images/us.webp" alt="Парк спецтехники ТОПАГРОБЕЛ" loading="lazy">
           </div>
           <div class="compare__list compare__list--backtext">
-            <h3 class="compare__card-title">У ТопАгроБел</h3>
+            <h3 class="compare__card-title">У ТОПАГРОБЕЛ</h3>
             <ol class="compare__items compare__items--good">
               <li><strong>Свой парк</strong> — 7 единиц LGCE, Lonking, ЕК-12</li>
               <li><strong>Закреплённые машинисты</strong> — у каждой техники свой оператор</li>
-              <li><strong>Быстрая подача</strong> — Минск и область, от 2 часов</li>
+              <li><strong>Быстрая подача</strong> — Минск, Минская область и Кобрин, от 2 часов</li>
               <li><strong>Честные цены</strong> — без скрытых платежей</li>
             </ol>
           </div>
@@ -164,6 +162,7 @@
   <section class="consultation screen-section section--bg-b" id="cta">
     <div class="container">
       <h2 class="section-title">Остались вопросы?</h2>
+      <p class="consultation__lead">Олег ответит на любой вопрос, поможет подобрать технику под ваши задачи, рассчитает сроки и стоимость аренды. Звоните или оставьте заявку — свяжемся в ближайшее время.</p>
       <div class="consultation__inner">
         <div class="consultation__left">
           <div class="consultation__contacts">
@@ -179,7 +178,7 @@
               <div class="contact-item__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
               <div>
                 <p class="contact-item__label">Регион</p>
-                <p class="contact-item__value">Минск и Минская область</p>
+                <p class="contact-item__value">Минск, Минская область и Кобрин</p>
               </div>
             </div>
             <div class="contact-item">
@@ -199,7 +198,7 @@
         </div>
         <div class="consultation__photo">
           <div class="consultation__photo-frame">
-            <img src="images/Cast/Oleg.webp" alt="Олег — менеджер ТопАгроБел" loading="lazy" width="500" height="600">
+            <img src="images/Cast/Oleg.webp" alt="Олег — менеджер ТОПАГРОБЕЛ" loading="lazy" width="500" height="600">
           </div>
         </div>
       </div>
@@ -214,7 +213,7 @@
           <h2 class="map-section__title">Наша техника на карте</h2>
           <p class="map-section__hint">Посмотрите, может, мы сейчас недалеко от вас</p>
         </div>
-        <div id="yandexMap" class="map-section__map" aria-label="Карта расположения техники ТопАгроБел"></div>
+        <div id="yandexMap" class="map-section__map" aria-label="Карта расположения техники ТОПАГРОБЕЛ"></div>
       </section>
     </div>
 
@@ -224,13 +223,13 @@
           <a href="#top" class="logo logo--footer">
             <img
               src="images/logo_ekskavator_nadezhny_variant_1.svg"
-              alt="ТопАгроБел"
+              alt="ТОПАГРОБЕЛ"
               class="logo__img"
               width="32"
               height="32"
               decoding="async"
             >
-            <span class="logo__text">ТопАгроБел</span>
+            <span class="logo__text">ТОПАГРОБЕЛ</span>
           </a>
           <nav class="footer__nav">
             <div class="footer__col footer__col--catalog">
@@ -252,12 +251,12 @@
               <p class="footer__manager">Олег</p>
               <div data-messenger-links data-messenger-compact></div>
             </div>
-            <img src="images/Cast/Oleg.webp" alt="Олег — менеджер ТопАгроБел" class="footer__photo" width="36" height="36" loading="lazy">
+            <img src="images/Cast/Oleg.webp" alt="Олег — менеджер ТОПАГРОБЕЛ" class="footer__photo" width="36" height="36" loading="lazy">
           </div>
         </div>
       </div>
       <div class="footer__bottom">
-        <p>&copy; 2026 ТопАгроБел. Аренда спецтехники в Минске и Минской области.</p>
+        <p>&copy; 2026 ТОПАГРОБЕЛ. Аренда спецтехники в Минске, Минской области и Кобрине.</p>
       </div>
     </footer>
   </div>

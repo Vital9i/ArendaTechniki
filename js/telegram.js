@@ -71,7 +71,7 @@ async function sendLeadViaTelegram({ name, phone, equipment, source }) {
   const sourceLine = escapeTelegramHtml(source);
   const time = new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Minsk' });
 
-  let message = `🔔 <b>Новая заявка с сайта ТопАгроБел!</b>\n\n`
+  let message = `🔔 <b>Новая заявка с сайта ТОПАГРОБЕЛ!</b>\n\n`
     + `👤 <b>Имя:</b> ${nameLine}\n`
     + `📱 <b>Телефон:</b> ${escapeTelegramHtml(phone)}\n`;
 

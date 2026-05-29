@@ -59,7 +59,7 @@ $phoneLine = htmlspecialchars($phone, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 $sourceLine = htmlspecialchars($source, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 $time = (new DateTime('now', new DateTimeZone('Europe/Minsk')))->format('d.m.Y H:i');
 
-$message = "🔔 <b>Новая заявка с сайта ТопАгроБел!</b>\n\n";
+$message = "🔔 <b>Новая заявка с сайта ТОПАГРОБЕЛ!</b>\n\n";
 $message .= "👤 <b>Имя:</b> {$nameLine}\n";
 $message .= "📱 <b>Телефон:</b> {$phoneLine}\n";
 

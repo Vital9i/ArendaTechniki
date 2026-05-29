@@ -16,7 +16,7 @@ const HERO_BANNERS = [
   {
     id: 'banner-1',
     fleetId: 'b879f-8953',
-    equipmentImage: 'images/Экскаватор-погрузчик LGCE B879F Baner.webp',
+    equipmentImage: 'images/backhoe-lgce-b879f-banner.webp',
     equipmentAlt: 'Экскаватор-погрузчик LGCE B879F',
     title: 'Копает, грузит, планирует',
     description: 'Экскаватор-погрузчик LGCE B879F: траншеи и котлованы, погрузка грунта, планировка участка, вывоз в самосвалы. Машинист в комплекте.'
@@ -24,7 +24,7 @@ const HERO_BANNERS = [
   {
     id: 'banner-2',
     fleetId: 'cdm308',
-    equipmentImage: 'images/мини погрузчик lonking cdm308.webp',
+    equipmentImage: 'images/miniloader-lonking-cdm308.webp',
     equipmentAlt: 'Минипогрузчик Lonking CDM308',
     title: 'Компактно — но мощно',
     description: 'Минипогрузчик Lonking CDM308 для дворов, узких проездов и благоустройства: щебень, песок, земля, снег и мелкий грунт.',
@@ -33,7 +33,7 @@ const HERO_BANNERS = [
   {
     id: 'banner-3',
     fleetId: 'e6255f',
-    equipmentImage: 'images/Экскаватор гусеничный LGCE E6255F.webp',
+    equipmentImage: 'images/excavator-crawler-lgce-e6255f.webp',
     equipmentAlt: 'Экскаватор гусеничный LGCE E6255F',
     title: 'Крупные объёмы — без компромиссов',
     description: 'Гусеничный LGCE E6255F: глубокие котлованы, масштабная разработка грунта, планировка больших площадок. Высокая проходимость по болотистым, заболоченным и рыхлым грунтам. Ковш 1,5 м³, вылет до 10 м. В комплекте — ковш или гидромолот на выбор.'
@@ -41,7 +41,7 @@ const HERO_BANNERS = [
   {
     id: 'banner-4',
     fleetId: 'b877f-8919',
-    equipmentImage: 'images/Погрузчик-экскаватор LGCE B877F.webp',
+    equipmentImage: 'images/backhoe-lgce-b877f.webp',
     equipmentAlt: 'Погрузчик-экскаватор LGCE B877F',
     title: 'Экскаватор + гидромолот',
     description: 'LGCE B877F копает траншеи, грузит и выравнивает грунт. Гидромолот HMB 68 (новый): бьёт бетон, асфальт и мёрзлый грунт — 500–900 уд/мин, клин 68 мм, подходит для LGCE.'
@@ -49,7 +49,7 @@ const HERO_BANNERS = [
   {
     id: 'banner-5',
     fleetId: 'l933f-8926',
-    equipmentImage: 'images/Погрузчик фронтальный LGCE L933F.webp',
+    equipmentImage: 'images/loader-lgce-l933f.webp',
     equipmentAlt: 'Погрузчик фронтальный LGCE L933F',
     title: 'Щебень, песок, погрузка',
     description: 'Фронтальный LGCE L933F: перевозка сыпучих материалов, загрузка самосвалов и техники, планировка строительных площадок. Ковш 1,8 м³.'
@@ -57,9 +57,9 @@ const HERO_BANNERS = [
   {
     id: 'banner-6',
     fleetId: 'ek12-8872',
-    equipmentImage: 'images/Экскаватор ЕК-12.webp',
+    equipmentImage: 'images/excavator-ek12.webp',
     equipmentAlt: 'Экскаватор ЕК-12',
-    title: 'Траншеи и переезды по области',
+    title: 'Траншеи и переезды по Минской области и Кобрину',
     description: 'Колёсный экскаватор ЕК-12: каналы под коммуникации, дорожные и земляные работы, быстрый переезд между объектами.',
     maskWideHorizontal: true
   }
@@ -69,7 +69,7 @@ const HERO_BANNERS = [
 const ABOUT_TEXT_CARDS = [
   {
     title: 'Парк техники',
-    text: '<strong>ТопАгроБел</strong> — аренда спецтехники <strong>с машинистом</strong> по <strong>Минску и всей Минской области</strong>. <strong>7 единиц в парке:</strong> экскаваторы-погрузчики, <strong>фронтальный погрузчик</strong>, <strong>колёсный экскаватор</strong>, <strong>экскаватор на гусеничном ходу</strong>, <strong>минипогрузчик</strong>. На каждой машине — <strong>свой оператор с допусками</strong>. Приезжаем на объект готовыми к работе.'
+    text: '<strong>ТОПАГРОБЕЛ</strong> — аренда спецтехники <strong>с машинистом</strong> по <strong>Минску, Минской области и Кобрину</strong>. <strong>7 единиц в парке:</strong> экскаваторы-погрузчики, <strong>фронтальный погрузчик</strong>, <strong>колёсный экскаватор</strong>, <strong>экскаватор на гусеничном ходу</strong>, <strong>минипогрузчик</strong>. На каждой машине — <strong>свой оператор с допусками</strong>. Приезжаем на объект готовыми к работе.'
   },
   {
     title: 'Условия аренды',
@@ -96,10 +96,10 @@ const FLEET = [
     cardBucket: 'фронт. 1,2 м³ / коп. 0,2 м³',
     hammerOption: true,
     description: 'Траншеи под канализацию и водопровод, котлованы под септики и фундаменты, погрузка и вывоз грунта, планировка участка. Машинист в комплекте. Можно подключить гидромолот (+30 руб).',
-    image: 'images/card/Экскаватор-погрузчик LGCE B879F.webp',
-    thumb: 'images/card/Экскаватор-погрузчик LGCE B879F.webp',
+    image: 'images/card/backhoe-lgce-b879f.webp',
+    thumb: 'images/card/backhoe-lgce-b879f.webp',
     quick: [
-      'Минск и Минская область',
+      'Минск, Минская область и Кобрин',
       'Масса: 9 700 кг',
       'Ковш фронт.: 1,2 м³ / ковш коп.: 0,2 м³'
     ],
@@ -124,14 +124,14 @@ const FLEET = [
     type: 'Фронтальный погрузчик',
     reg: '8926 ОН-5',
     driver: 'Галуза Артём Юрьевич',
-    priceFrom: 90,
+    priceFrom: 70,
     cardMass: '10 110 кг',
     cardBucket: '1,8 м³',
     description: 'Перевозка щебня, песка и сыпучих материалов, загрузка самосвалов, планировка площадок под фундамент и заезд. Подсыпка и благоустройство территории.',
-    image: 'images/card/Погрузчик фронтальный LGCE L933F.webp',
-    thumb: 'images/card/Погрузчик фронтальный LGCE L933F.webp',
+    image: 'images/card/loader-lgce-l933f.webp',
+    thumb: 'images/card/loader-lgce-l933f.webp',
     quick: [
-      'Минск и Минская область',
+      'Минск, Минская область и Кобрин',
       'Масса: 10 110 кг',
       'Ковш: 1,8 м³'
     ],
@@ -160,10 +160,10 @@ const FLEET = [
     cardBucket: 'фронт. 1,0 м³ / коп. 0,18 м³',
     hammerOption: true,
     description: 'Копает траншеи под канализацию и дренаж, котлованы под септики и фундаменты, погрузка и планировка грунта. Машинист в комплекте. Гидромолот на выбор (+30 руб).',
-    image: 'images/card/Погрузчик-экскаватор LGCE B877F.webp',
-    thumb: 'images/card/Погрузчик-экскаватор LGCE B877F.webp',
+    image: 'images/card/backhoe-lgce-b877f-card.webp',
+    thumb: 'images/card/backhoe-lgce-b877f-card.webp',
     quick: [
-      'Минск и Минская область',
+      'Минск, Минская область и Кобрин',
       'Масса: 8 450 кг',
       'Ковш фронт.: 1,0 м³ / ковш коп.: 0,18 м³'
     ],
@@ -192,10 +192,10 @@ const FLEET = [
     cardBucket: 'фронт. 1,2 м³ / коп. 0,2 м³',
     hammerOption: true,
     description: 'Траншеи под канализацию и водопровод, котлованы под септики и фундаменты, погрузка и вывоз грунта, планировка участка. Машинист в комплекте. Можно подключить гидромолот (+30 руб).',
-    image: 'images/card/Экскаватор-погрузчик LGCE B879F.webp',
-    thumb: 'images/card/Экскаватор-погрузчик LGCE B879F.webp',
+    image: 'images/card/backhoe-lgce-b879f.webp',
+    thumb: 'images/card/backhoe-lgce-b879f.webp',
     quick: [
-      'Минск и Минская область',
+      'Минск, Минская область и Кобрин',
       'Масса: 9 700 кг',
       'Ковш фронт.: 1,2 м³ / ковш коп.: 0,2 м³'
     ],
@@ -222,11 +222,11 @@ const FLEET = [
     priceFrom: 80,
     cardMass: '12 900 кг',
     cardBucket: '0,65 м³',
-    description: 'Траншеи под канализацию, водопровод и дренаж, котлованы под септики и фундаменты, дорожные и земляные работы. Быстрый переезд между объектами по области.',
-    image: 'images/card/Экскаватор ЕК-12.webp',
-    thumb: 'images/card/Экскаватор ЕК-12.webp',
+    description: 'Траншеи под канализацию, водопровод и дренаж, котлованы под септики и фундаменты, дорожные и земляные работы. Быстрый переезд между объектами в Минске, Минской области и Кобрине.',
+    image: 'images/card/excavator-ek12.webp',
+    thumb: 'images/card/excavator-ek12.webp',
     quick: [
-      'Минск и Минская область',
+      'Минск, Минская область и Кобрин',
       'Масса: 12 900 кг',
       'Ковш: 0,65 м³'
     ],
@@ -255,10 +255,10 @@ const FLEET = [
     cardBucket: '1,5 м³',
     hammerOption: true,
     description: 'Крупные котлованы под фундаменты и септики, траншеи под инженерные сети и канализацию, масштабная разработка грунта. Высокая проходимость по болотистым грунтам. Ковш или гидромолот на выбор.',
-    image: 'images/card/Экскаватор гусеничный LGCE E6255F.webp',
-    thumb: 'images/card/Экскаватор гусеничный LGCE E6255F.webp',
+    image: 'images/card/excavator-crawler-lgce-e6255f.webp',
+    thumb: 'images/card/excavator-crawler-lgce-e6255f.webp',
     quick: [
-      'Минск и Минская область',
+      'Минск, Минская область и Кобрин',
       'Масса: 25 500 кг',
       'Ковш: 1,5 м³'
     ],
@@ -286,10 +286,10 @@ const FLEET = [
     cardMass: '3 100 кг',
     cardBucket: '0,48 м³',
     description: 'Работы во дворах и на узких площадках: планировка, погрузка щебня и песка, подсыпка под фундамент и септик, благоустройство и расчистка территории.',
-    image: 'images/card/мини погрузчик lonking cdm308.webp',
-    thumb: 'images/card/мини погрузчик lonking cdm308.webp',
+    image: 'images/card/miniloader-lonking-cdm308.webp',
+    thumb: 'images/card/miniloader-lonking-cdm308.webp',
     quick: [
-      'Минск и Минская область',
+      'Минск, Минская область и Кобрин',
       'Масса: 3 100 кг',
       'Ковш: 0,48 м³'
     ],
@@ -319,7 +319,7 @@ const FLEET = [
     image: 'images/card/Molot.webp',
     thumb: 'images/card/Molot.webp',
     quick: [
-      'Минск и Минская область',
+      'Минск, Минская область и Кобрин',
       '2025 г. в.',
       'Для экскаваторов-погрузчиков LGCE'
     ],
@@ -334,21 +334,31 @@ const FLEET = [
   }
 ];
 
-/** Машинисты — блок «Наши ребята строят заводы» (фото из images/Cast) */
+/** Операторы — блок «Наши операторы» (фото из images/Cast) */
 const FACTORY_DRIVERS = [
   {
     name: 'Дудорга Андрей Александрович',
     namePatronymic: 'Андрей Александрович',
-    photo: 'images/Cast/Дудорга А. А..webp'
+    photo: 'images/Cast/dudorga-a-a.webp'
   },
   {
     name: 'Галуза Артём Юрьевич',
     namePatronymic: 'Артём Юрьевич',
-    photo: 'images/Cast/Галуза А. Ю .webp'
+    photo: 'images/Cast/galuza-a-yu.webp'
   },
   {
     name: 'Сковородко Сергей Сергеевич',
     namePatronymic: 'Сергей Сергеевич',
-    photo: 'images/Cast/Сковородкой С. С.webp'
+    photo: 'images/Cast/skovorodko-s-s.webp'
+  },
+  {
+    name: 'Дайнеко Александр Николаевич',
+    namePatronymic: 'Александр Николаевич',
+    photo: 'images/Cast/dayneko-a-n.webp'
+  },
+  {
+    name: 'Шимкус Максим Альгисович',
+    namePatronymic: 'Максим Альгисович',
+    photo: 'images/Cast/shimkus-maksim.webp'
   }
 ];
