@@ -14,11 +14,13 @@ const MAP_WORK_PERIODS = [
   'до 1 июня 2026'
 ];
 
-/** Техника на карте: часть в Минске, часть в Кобрине */
+/** Техника на карте: Минск, Кобрин, Брест */
 const MAP_KOBRIN_FLEET_IDS = ['b879f-8965', 'ek12-8872', 'cdm308'];
+const MAP_BREST_FLEET_IDS = ['l933f-8926'];
 
 const MAP_CITY_COORDS = {
   minsk: { place: 'Минск', coords: [53.9045, 27.5615] },
+  brest: { place: 'Брест', coords: [52.0976, 23.7341] },
   kobrin: { place: 'Кобрин', coords: [52.2138, 24.3564] }
 };
 
@@ -47,7 +49,10 @@ function buildMapMarkers() {
   const periods = shuffleArray(MAP_WORK_PERIODS);
 
   const kobrinFleet = fleet.filter(item => MAP_KOBRIN_FLEET_IDS.includes(item.id));
-  const minskFleet = fleet.filter(item => !MAP_KOBRIN_FLEET_IDS.includes(item.id));
+  const brestFleet = fleet.filter(item => MAP_BREST_FLEET_IDS.includes(item.id));
+  const minskFleet = fleet.filter(item =>
+    !MAP_KOBRIN_FLEET_IDS.includes(item.id) && !MAP_BREST_FLEET_IDS.includes(item.id)
+  );
 
   const buildCityMarkers = (items, cityKey) => {
     const city = MAP_CITY_COORDS[cityKey];
@@ -62,6 +67,7 @@ function buildMapMarkers() {
 
   return [
     ...buildCityMarkers(minskFleet, 'minsk'),
+    ...buildCityMarkers(brestFleet, 'brest'),
     ...buildCityMarkers(kobrinFleet, 'kobrin')
   ];
 }
@@ -82,7 +88,7 @@ function initYandexMap() {
 
   ymaps.ready(() => {
     const map = new ymaps.Map('yandexMap', {
-      center: [53.35, 26.2],
+      center: [52.85, 26.4],
       zoom: 7,
       controls: ['zoomControl', 'fullscreenControl']
     }, {

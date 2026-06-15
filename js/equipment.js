@@ -1,6 +1,9 @@
 /** Макет карточки hero */
 const HERO_CARD_IMAGE = 'images/HeroCard.webp';
 
+/** Зона работы */
+const SERVICE_REGION = 'Минск, Минская область, Кобрин, Брест';
+
 /** Контакты Олега */
 const CONTACT = {
   olegPhone: '+375291286217',
@@ -59,8 +62,8 @@ const HERO_BANNERS = [
     fleetId: 'ek12-8872',
     equipmentImage: 'images/excavator-ek12.webp',
     equipmentAlt: 'Экскаватор ЕК-12',
-    title: 'Траншеи и переезды по Минской области и Кобрину',
-    description: 'Колёсный экскаватор ЕК-12: каналы под коммуникации, дорожные и земляные работы, быстрый переезд между объектами.',
+    title: 'Траншеи и переезды по Минску, Минской области, Кобрину и Бресту',
+    description: 'Колёсный экскаватор ЕК-12: каналы под коммуникации, дорожные и земляные работы, быстрый переезд между объектами в Минске, Минской области, Кобрине и Бресте.',
     maskWideHorizontal: true
   }
 ];
@@ -69,7 +72,7 @@ const HERO_BANNERS = [
 const ABOUT_TEXT_CARDS = [
   {
     title: 'Парк техники',
-    text: '<strong>ТОПАГРОБЕЛ</strong> — аренда спецтехники <strong>с машинистом</strong> по <strong>Минску, Минской области и Кобрину</strong>. <strong>7 единиц в парке:</strong> экскаваторы-погрузчики, <strong>фронтальный погрузчик</strong>, <strong>колёсный экскаватор</strong>, <strong>экскаватор на гусеничном ходу</strong>, <strong>минипогрузчик</strong>. На каждой машине — <strong>свой оператор с допусками</strong>. Приезжаем на объект готовыми к работе.'
+    text: '<strong>ТОПАГРОБЕЛ</strong> — аренда спецтехники <strong>с машинистом</strong> по <strong>Минску, Минской области, Кобрину и Бресту</strong>. <strong>7 единиц в парке:</strong> экскаваторы-погрузчики, <strong>фронтальный погрузчик</strong>, <strong>колёсный экскаватор</strong>, <strong>экскаватор на гусеничном ходу</strong>, <strong>минипогрузчик</strong>. На каждой машине — <strong>свой оператор с допусками</strong>. Приезжаем на объект готовыми к работе.'
   },
   {
     title: 'Условия аренды',
@@ -99,7 +102,7 @@ const FLEET = [
     image: 'images/card/backhoe-lgce-b879f.webp',
     thumb: 'images/card/backhoe-lgce-b879f.webp',
     quick: [
-      'Минск, Минская область и Кобрин',
+      SERVICE_REGION,
       'Масса: 9 700 кг',
       'Ковш фронт.: 1,2 м³ / ковш коп.: 0,2 м³'
     ],
@@ -131,7 +134,7 @@ const FLEET = [
     image: 'images/card/loader-lgce-l933f.webp',
     thumb: 'images/card/loader-lgce-l933f.webp',
     quick: [
-      'Минск, Минская область и Кобрин',
+      SERVICE_REGION,
       'Масса: 10 110 кг',
       'Ковш: 1,8 м³'
     ],
@@ -163,7 +166,7 @@ const FLEET = [
     image: 'images/card/backhoe-lgce-b877f-card.webp',
     thumb: 'images/card/backhoe-lgce-b877f-card.webp',
     quick: [
-      'Минск, Минская область и Кобрин',
+      SERVICE_REGION,
       'Масса: 8 450 кг',
       'Ковш фронт.: 1,0 м³ / ковш коп.: 0,18 м³'
     ],
@@ -195,7 +198,7 @@ const FLEET = [
     image: 'images/card/backhoe-lgce-b879f.webp',
     thumb: 'images/card/backhoe-lgce-b879f.webp',
     quick: [
-      'Минск, Минская область и Кобрин',
+      SERVICE_REGION,
       'Масса: 9 700 кг',
       'Ковш фронт.: 1,2 м³ / ковш коп.: 0,2 м³'
     ],
@@ -222,11 +225,11 @@ const FLEET = [
     priceFrom: 80,
     cardMass: '12 900 кг',
     cardBucket: '0,65 м³',
-    description: 'Траншеи под канализацию, водопровод и дренаж, котлованы под септики и фундаменты, дорожные и земляные работы. Быстрый переезд между объектами в Минске, Минской области и Кобрине.',
+    description: 'Траншеи под канализацию, водопровод и дренаж, котлованы под септики и фундаменты, дорожные и земляные работы. Быстрый переезд между объектами в Минске, Минской области, Кобрине и Бресте.',
     image: 'images/card/excavator-ek12.webp',
     thumb: 'images/card/excavator-ek12.webp',
     quick: [
-      'Минск, Минская область и Кобрин',
+      SERVICE_REGION,
       'Масса: 12 900 кг',
       'Ковш: 0,65 м³'
     ],
@@ -258,7 +261,7 @@ const FLEET = [
     image: 'images/card/excavator-crawler-lgce-e6255f.webp',
     thumb: 'images/card/excavator-crawler-lgce-e6255f.webp',
     quick: [
-      'Минск, Минская область и Кобрин',
+      SERVICE_REGION,
       'Масса: 25 500 кг',
       'Ковш: 1,5 м³'
     ],
@@ -289,7 +292,7 @@ const FLEET = [
     image: 'images/card/miniloader-lonking-cdm308.webp',
     thumb: 'images/card/miniloader-lonking-cdm308.webp',
     quick: [
-      'Минск, Минская область и Кобрин',
+      SERVICE_REGION,
       'Масса: 3 100 кг',
       'Ковш: 0,48 м³'
     ],
@@ -319,7 +322,7 @@ const FLEET = [
     image: 'images/card/Molot.webp',
     thumb: 'images/card/Molot.webp',
     quick: [
-      'Минск, Минская область и Кобрин',
+      SERVICE_REGION,
       '2025 г. в.',
       'Для экскаваторов-погрузчиков LGCE'
     ],

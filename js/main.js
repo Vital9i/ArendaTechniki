@@ -1,27 +1,76 @@
-let activeEquipmentId = FLEET[0].id;
+let activeEquipmentId = (typeof FLEET !== 'undefined' && FLEET[0]) ? FLEET[0].id : '';
 let heroBannerSwiper = null;
 let closeMobileNavFn = null;
 
+function runInit(name, fn) {
+  try {
+    fn();
+  } catch (error) {
+    console.error(`[init] ${name}`, error);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  setHeaderHeight();
-  initHeroBanner();
-  initAboutCards();
-  initFactoryDrivers();
-  initCatalog();
-  initForms();
-  initModal();
-  initOrderModal();
-  initScrollButtons();
-  initSmoothScroll();
-  initMobileNav();
-  initHeaderScroll();
-  initMessengerLinks();
+  runInit('setHeaderHeight', setHeaderHeight);
+  runInit('initOrderModal', initOrderModal);
+  runInit('initHeroBanner', initHeroBanner);
+  runInit('initAboutCards', initAboutCards);
+  runInit('initFactoryDrivers', initFactoryDrivers);
+  runInit('initCatalog', initCatalog);
+  runInit('initForms', initForms);
+  runInit('initModal', initModal);
+  runInit('initScrollButtons', initScrollButtons);
+  runInit('initSmoothScroll', initSmoothScroll);
+  runInit('initMobileNav', initMobileNav);
+  runInit('initHeaderScroll', initHeaderScroll);
+  runInit('initMessengerLinks', initMessengerLinks);
+  runInit('initDesktopPhoneLinks', initDesktopPhoneLinks);
+  syncDesktopPhoneLinks();
   window.addEventListener('resize', setHeaderHeight);
 
   if (location.hash.startsWith('#eq-')) {
     history.replaceState(null, '', location.pathname + location.search);
   }
 });
+
+function isMobilePhoneUi() {
+  return window.matchMedia('(max-width: 768px)').matches;
+}
+
+function isPhoneLinkExcluded(link) {
+  return Boolean(link.closest('.nav-mobile') || link.closest('.mobile-call-bar'));
+}
+
+function syncDesktopPhoneLinks() {
+  const callable = isMobilePhoneUi();
+
+  document.querySelectorAll('a[href^="tel:"], a[data-tel-href]').forEach(link => {
+    if (isPhoneLinkExcluded(link)) return;
+
+    if (!link.dataset.telHref) {
+      const href = link.getAttribute('href');
+      if (href?.startsWith('tel:')) link.dataset.telHref = href;
+    }
+
+    if (!link.dataset.telHref) return;
+
+    if (callable) {
+      link.setAttribute('href', link.dataset.telHref);
+      link.removeAttribute('aria-disabled');
+      link.classList.remove('phone-static');
+    } else {
+      link.removeAttribute('href');
+      link.setAttribute('aria-disabled', 'true');
+      link.classList.add('phone-static');
+    }
+  });
+}
+
+function initDesktopPhoneLinks() {
+  syncDesktopPhoneLinks();
+  window.matchMedia('(max-width: 768px)').addEventListener('change', syncDesktopPhoneLinks);
+  window.addEventListener('resize', syncDesktopPhoneLinks);
+}
 
 function initMessengerLinks() {
   if (typeof CONTACT === 'undefined') return;
@@ -117,7 +166,7 @@ function initHeroBanner() {
             <div class="hero-banner__card-copy">
               <h2 class="hero-banner__title">${banner.title || banner.slogan || ''}</h2>
               ${banner.description ? `<p class="hero-banner__desc">${banner.description}</p>` : ''}
-              <button type="button" class="btn btn--brown hero-banner__order" data-order="${banner.fleetId}" data-order-from="Главная">Заказать</button>
+              <button type="button" class="btn btn--brown hero-banner__order swiper-no-swiping" data-order="${banner.fleetId}" data-order-from="Главная">Заказать</button>
             </div>
             <div class="hero-banner__card-media">
               ${renderHeroMedia(banner)}
@@ -128,9 +177,17 @@ function initHeroBanner() {
     </div>
   `).join('');
 
+  if (typeof Swiper === 'undefined') {
+    console.warn('[init] Swiper не загружен — слайдер отключён, кнопки «Заказать» работают');
+    bindOrderButtons(wrapper);
+    return;
+  }
+
   heroBannerSwiper = new Swiper('.hero-banner-swiper', {
     loop: true,
     speed: 800,
+    preventClicks: false,
+    preventClicksPropagation: false,
     autoplay: {
       delay: 5000,
       disableOnInteraction: false,
@@ -145,9 +202,54 @@ function initHeroBanner() {
       prevEl: '.hero-banner__arrow--prev'
     }
   });
+
+  bindOrderButtons(wrapper);
+}
+
+function pushDataLayer(event, params = {}) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event, ...params });
+}
+
+function redirectToThankYou({ name, phone, formId, source, equipment }) {
+  const params = new URLSearchParams();
+  if (name) params.set('name', name);
+  if (phone) params.set('phone', phone);
+  if (formId) params.set('form', formId);
+  if (source) params.set('source', source);
+  if (equipment) params.set('equipment', equipment);
+
+  const qs = params.toString();
+  window.location.href = `thank-you.html${qs ? `?${qs}` : ''}`;
+}
+
+function bindOrderButton(btn) {
+  if (!btn || btn.dataset.orderBound === '1') return;
+
+  btn.dataset.orderBound = '1';
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+
+    if (btn.hasAttribute('data-open-order')) {
+      openOrderModal(null, btn.dataset.orderFrom || 'Заказать звонок');
+      if (btn.hasAttribute('data-close-nav')) closeMobileNav();
+      return;
+    }
+
+    openOrderModal(btn.dataset.order, btn.dataset.orderFrom || 'Каталог');
+    closeMobileNav();
+  });
+}
+
+function bindOrderButtons(root = document) {
+  root.querySelectorAll('[data-order], [data-open-order]').forEach(btn => {
+    if (btn.closest('#equipmentModal .modal__content')) return;
+    bindOrderButton(btn);
+  });
 }
 
 function setActiveEquipment(id) {
+  if (typeof FLEET === 'undefined') return;
   const item = FLEET.find(eq => eq.id === id);
   if (!item) return;
 
@@ -155,7 +257,8 @@ function setActiveEquipment(id) {
 }
 
 function findCatalogItem(id) {
-  return FLEET.find(eq => eq.id === id);
+  if (typeof FLEET === 'undefined') return null;
+  return FLEET.find(eq => eq.id === id) || null;
 }
 
 function initAboutCards() {
@@ -188,6 +291,11 @@ function initFactoryDrivers() {
 }
 
 function initCatalog() {
+  if (typeof FLEET === 'undefined') {
+    console.error('[init] FLEET не загружен — проверьте js/equipment.js на сервере');
+    return;
+  }
+
   renderCatalogGrid('catalogGridEquipment', FLEET);
 
   const footerLinks = document.getElementById('footerCatalogLinks');
@@ -261,6 +369,7 @@ function renderCatalogGrid(containerId, items) {
     btn.addEventListener('click', () => openModal(btn.dataset.open));
   });
 
+  bindOrderButtons(grid);
 }
 
 function getModalSpecs(specs) {
@@ -291,7 +400,8 @@ function openModal(id) {
     </div>
   `;
 
-  content.querySelector('[data-order]')?.addEventListener('click', () => {
+  content.querySelector('[data-order]')?.addEventListener('click', e => {
+    e.preventDefault();
     closeModal();
     openOrderModal(item.id, 'Подробнее');
   });
@@ -312,17 +422,24 @@ function openOrderModal(id, pageSource = 'Модальное окно') {
   const modal = document.getElementById('orderModal');
   if (!form || !modal) return;
 
-  const equipmentInput = form.querySelector('[name="equipment"]');
+  const formTitle = form.querySelector('.order-form__title');
   const item = id ? findCatalogItem(id) : null;
 
   if (item) {
     setActiveEquipment(id);
-    equipmentInput.value = item.name;
+    form.dataset.equipment = item.name;
+    if (formTitle) formTitle.textContent = 'Заказать технику';
   } else {
-    equipmentInput.value = 'Не выбрана — перезвоним';
+    delete form.dataset.equipment;
+    if (formTitle) formTitle.textContent = 'Заказать звонок';
   }
 
   form.dataset.source = pageSource;
+
+  pushDataLayer('open_order_form', {
+    form_source: pageSource,
+    equipment_name: item?.name || ''
+  });
 
   closeModal();
   modal.classList.add('is-open');
@@ -343,22 +460,7 @@ function closeOrderModal() {
 }
 
 function initOrderModal() {
-  document.addEventListener('click', e => {
-    const orderBtn = e.target.closest('[data-order]');
-    if (orderBtn && !orderBtn.closest('#equipmentModal .modal__content')) {
-      e.preventDefault();
-      openOrderModal(orderBtn.dataset.order, orderBtn.dataset.orderFrom || 'Каталог');
-      closeMobileNav();
-      return;
-    }
-
-    const openOrderBtn = e.target.closest('[data-open-order]');
-    if (openOrderBtn) {
-      e.preventDefault();
-      openOrderModal(null, openOrderBtn.dataset.orderFrom || 'Заказать звонок');
-      if (openOrderBtn.hasAttribute('data-close-nav')) closeMobileNav();
-    }
-  });
+  bindOrderButtons();
 
   document.querySelectorAll('[data-close-order-modal]').forEach(el => {
     el.addEventListener('click', closeOrderModal);
@@ -467,8 +569,7 @@ async function submitLeadForm(form) {
   const phoneRaw = phoneInput?.value.trim() || '';
   const phone = formatBelarusPhone(phoneRaw);
   const name = form.querySelector('[name="name"]')?.value.trim();
-  let equipment = form.querySelector('[name="equipment"]')?.value?.trim() || '';
-  if (equipment.startsWith('Не выбрана')) equipment = '';
+  const equipment = form.id === 'orderForm' ? (form.dataset.equipment?.trim() || '') : '';
   const submitBtn = form.querySelector('[type="submit"]');
 
   if (!getNationalDigits(phoneRaw).length) {
@@ -495,10 +596,14 @@ async function submitLeadForm(form) {
   try {
     await sendLeadToTelegram({ name: name || '', phone, equipment, source });
 
-    const greeting = name ? `${name}, спасибо` : 'Спасибо';
-    alert(`${greeting}! Олег свяжется с вами: ${phone}.`);
-    form.reset();
-    if (form.id === 'orderForm') closeOrderModal();
+    redirectToThankYou({
+      name: name || '',
+      phone,
+      formId: form.id,
+      source,
+      equipment: equipment || ''
+    });
+    return;
   } catch (error) {
     console.error(error);
     const details = error?.message ? `\n\n${error.message}` : '';

@@ -5,12 +5,27 @@ function escapeTelegramHtml(text) {
     .replace(/>/g, '&gt;');
 }
 
+function isLocalHost(hostname) {
+  const host = String(hostname || '').toLowerCase();
+  return !host
+    || host === 'localhost'
+    || host === '127.0.0.1'
+    || host === '[::1]'
+    || host === '::1'
+    || host.endsWith('.local');
+}
+
+function formatTelegramPhone(phone) {
+  const digits = String(phone || '').replace(/\D/g, '');
+  return digits ? `+${digits}` : String(phone || '').trim();
+}
+
 function buildLeadSource(pageSource) {
   let source = String(pageSource || 'Сайт').trim();
   source = source.replace(/\s*Источник:\s*.+$/i, '').trim();
 
-  const site = (location.hostname || 'topagrobel.by').replace(/^www\./, '');
-  if (!site || source.includes(site)) return source;
+  const site = (location.hostname || '').replace(/^www\./, '');
+  if (!site || isLocalHost(site) || source.includes(site)) return source;
 
   return `${source} · ${site}`;
 }
@@ -71,9 +86,9 @@ async function sendLeadViaTelegram({ name, phone, equipment, source }) {
   const sourceLine = escapeTelegramHtml(source);
   const time = new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Minsk' });
 
-  let message = `🔔 <b>Новая заявка с сайта ТОПАГРОБЕЛ!</b>\n\n`
+  let message = `🔔 <b>Новая заявка с сайта АРЕНДА!</b>\n\n`
     + `👤 <b>Имя:</b> ${nameLine}\n`
-    + `📱 <b>Телефон:</b> ${escapeTelegramHtml(phone)}\n`;
+    + `📱 <b>Телефон:</b> ${formatTelegramPhone(phone)}\n`;
 
   if (equipment?.trim() && !equipment.startsWith('Не выбрана')) {
     message += `🚜 <b>Техника:</b> ${escapeTelegramHtml(equipment.trim())}\n`;

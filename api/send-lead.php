@@ -39,27 +39,34 @@ if (!is_array($data)) {
 }
 
 $name = trim((string)($data['name'] ?? ''));
-$phone = preg_replace('/[^\d+]/', '', (string)($data['phone'] ?? ''));
+$phoneRaw = trim((string)($data['phone'] ?? ''));
+$phoneDigits = preg_replace('/\D/', '', $phoneRaw);
 $equipment = trim((string)($data['equipment'] ?? ''));
 $source = trim((string)($data['source'] ?? 'Сайт'));
 $source = preg_replace('/\s*Источник:\s*.+$/iu', '', $source);
 $host = preg_replace('/^www\./', '', $_SERVER['HTTP_HOST'] ?? '');
-if ($host !== '' && stripos($source, $host) === false) {
+$isLocalHost = $host === ''
+    || $host === 'localhost'
+    || $host === '127.0.0.1'
+    || $host === '[::1]'
+    || $host === '::1'
+    || str_ends_with(strtolower($host), '.local');
+if ($host !== '' && !$isLocalHost && stripos($source, $host) === false) {
     $source = $source !== '' ? "{$source} · {$host}" : $host;
 }
 
-if (strlen($phone) < 9) {
+if (strlen($phoneDigits) < 9) {
     http_response_code(400);
     echo json_encode(['ok' => false, 'error' => 'Укажите корректный телефон']);
     exit;
 }
 
 $nameLine = $name !== '' ? htmlspecialchars($name, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') : 'не указано';
-$phoneLine = htmlspecialchars($phone, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+$phoneLine = htmlspecialchars('+' . $phoneDigits, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 $sourceLine = htmlspecialchars($source, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 $time = (new DateTime('now', new DateTimeZone('Europe/Minsk')))->format('d.m.Y H:i');
 
-$message = "🔔 <b>Новая заявка с сайта ТОПАГРОБЕЛ!</b>\n\n";
+$message = "🔔 <b>Новая заявка с сайта АРЕНДА!</b>\n\n";
 $message .= "👤 <b>Имя:</b> {$nameLine}\n";
 $message .= "📱 <b>Телефон:</b> {$phoneLine}\n";
 

@@ -1,6 +1,12 @@
 # UTF-8 для кириллических имён файлов
 AddDefaultCharset UTF-8
 
+# Страница благодарности для GTM (/thank-you → thank-you.html)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^thank-you/?$ thank-you.html [L]
+</IfModule>
+
 # Кеш статики
 <IfModule mod_expires.c>
   ExpiresActive On

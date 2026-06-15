@@ -1,0 +1,56 @@
+---
+description: Кликабельный номер телефона в заявках Telegram Bot API
+alwaysApply: false
+globs: **/*telegram*.{js,php,ts},**/send-lead.php
+---
+
+# Кликабельный номер в Telegram (Bot API)
+
+## Рабочий способ (проверено)
+
+Telegram **сам** распознаёт номер, если он в **компактном международном формате без пробелов и скобок**:
+
+```
++375291286217
+```
+
+```javascript
+function formatTelegramPhone(phone) {
+  const digits = String(phone || '').replace(/\D/g, '');
+  return digits ? `+${digits}` : String(phone || '').trim();
+}
+
+// parse_mode: 'HTML'
+`📱 <b>Телефон:</b> ${formatTelegramPhone(phone)}\n`
+```
+
+PHP: `'+' . preg_replace('/\D/', '', $phoneRaw)` — то же самое.
+
+## Что НЕ работает или ломает отправку
+
+| Подход | Результат |
+|--------|-----------|
+| `<a href="tel:+375...">` в HTML | Не кликабется |
+| `entities` + `text_link` + `tel:` | Часто ошибка API / нестабильно |
+| Inline-кнопка `url: tel:+375...` | Telegram отклоняет (только `http`/`tg://`) |
+| `+375 (29) 128-62-17` с пробелами | Не автолинкуется |
+
+## Поведение в клиенте Telegram
+
+При нажатии на автоопределённый номер Telegram показывает меню: **Позвонить**, добавить в контакты, пригласить, копировать. **Сразу в звонилку без меню через Bot API сделать нельзя** — это ограничение клиента.
+
+## Источник заявки (локальная разработка)
+
+Не добавлять `127.0.0.1` / `localhost` к полю «Источник» — Telegram делает IP кликабельным:
+
+```javascript
+const isLocal = ['localhost', '127.0.0.1', '::1'].includes(host);
+if (!isLocal && host && !source.includes(host)) source += ` · ${host}`;
+```
+
+## Чеклист для нового проекта
+
+1. Отправка через `sendMessage` + `parse_mode: 'HTML'`
+2. Телефон только как `+{digits}` в тексте
+3. Не использовать `tel:` в HTML, entities и inline-кнопках без теста на prod
+4. Протестировать на телефоне в группе/чате, не только в BotFather

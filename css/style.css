@@ -269,6 +269,35 @@ input, button, select { font-family: inherit; font-size: inherit; }
   color: var(--brown);
 }
 
+@media (min-width: 769px) {
+  a[href^="tel:"]:not(.nav-mobile__call):not(.mobile-call-bar__phone),
+  a.phone-static {
+    cursor: default;
+    pointer-events: none;
+    text-decoration: none;
+  }
+
+  .header__phone:not([href]),
+  .footer__phone:not([href]),
+  a.contact-item__value:not([href]),
+  .about-card__text a:not([href]) {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .header__phone:not([href]):hover,
+  .footer__phone:not([href]):hover,
+  a.contact-item__value:not([href]):hover,
+  a.phone-static:hover {
+    color: inherit;
+  }
+
+  .about-card__text a:not([href]):hover {
+    color: var(--btn-brown);
+    text-decoration: none;
+  }
+}
+
 .messenger-links {
   display: flex;
   align-items: center;
@@ -1702,20 +1731,6 @@ a.contact-item__value:hover { color: var(--brown); }
   margin-bottom: 4px;
 }
 
-.order-form__field {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.order-form__label {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--text-light);
-  letter-spacing: 0.04em;
-}
-
 .order-form input {
   width: 100%;
   padding: 12px 14px;
@@ -1726,15 +1741,111 @@ a.contact-item__value:hover { color: var(--brown); }
   font-family: inherit;
 }
 
-.order-form input[readonly] {
-  background: var(--gray-light);
-  color: var(--text);
-  cursor: default;
-}
-
-.order-form input:focus:not([readonly]) {
+.order-form input:focus {
   border-color: var(--brown);
   box-shadow: 0 0 0 2px rgba(75, 54, 33, 0.15);
+}
+
+.modal__dialog--thank-you {
+  max-width: 400px;
+  padding: 36px 28px 28px;
+  text-align: center;
+  border-top: 4px solid var(--yellow);
+}
+
+.thank-you {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.thank-you__icon {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--btn-brown);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  box-shadow: 0 6px 20px rgba(255, 204, 0, 0.35);
+}
+
+.thank-you__title {
+  font-size: 20px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.thank-you__text {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.55;
+  color: var(--text-light);
+  max-width: 30ch;
+}
+
+.thank-you__phone {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--btn-brown);
+  padding: 10px 18px;
+  background: var(--gray-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-border);
+  letter-spacing: 0.2px;
+}
+
+.thank-you__btn {
+  margin-top: 8px;
+}
+
+.thank-you-page {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+.thank-you-page__backdrop {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(44, 36, 22, 0.45);
+}
+
+.thank-you-page__window {
+  width: 100%;
+  max-width: 380px;
+  padding: 36px 28px 28px;
+  background: var(--white);
+  border-radius: var(--radius);
+  border-top: 4px solid var(--yellow);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: thank-you-pop 0.35s ease;
+}
+
+@keyframes thank-you-pop {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+#thankYouModal {
+  z-index: 210;
 }
 
 /* Responsive */
