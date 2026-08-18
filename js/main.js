@@ -322,6 +322,8 @@ function renderCardSpecs(item) {
 
   if (item.cardMass) lines.push(`Масса: ${item.cardMass}`);
   if (item.cardBucket) lines.push(`Ковш: ${item.cardBucket}`);
+  if (item.cardDepth) lines.push(`Глубина копания: ${item.cardDepth}`);
+  if (item.cardDrive) lines.push(item.cardDrive);
   if (item.hammerOption) lines.push(`Гидромолот: +${FLEET_HAMMER_ADDON} руб`);
   if (item.cardNote) lines.push(item.cardNote);
 
@@ -756,6 +758,6 @@ function shortName(name) {
     .replace('Экскаватор-погрузчик ', '')
     .replace('Погрузчик-экскаватор ', '')
     .replace('Погрузчик фронтальный ', '')
-    .replace('Экскаватор гусеничный ', '')
+    .replace('Экскаватор колёсный ', '')
     .replace('Минипогрузчик ', '');
 }
